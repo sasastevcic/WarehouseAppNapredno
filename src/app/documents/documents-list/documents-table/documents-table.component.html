@@ -1,0 +1,61 @@
+<div class="row">
+  <div class="col-sm-12">
+    <button class="float-right btn btn-primary" (click)="showSettings = !showSettings">
+      <span *ngIf="!showSettings">Open table settings</span>
+      <span *ngIf="showSettings">Close table settings</span>
+    </button>
+    <form class="float-right" *ngIf="showSettings">
+      <small>Date of Creation</small><input type="checkbox" name="dateOfCreation" [(ngModel)]="columns.dateOfCreation">
+      <small>Date of Recording</small><input type="checkbox" name="dateOfRecording" [(ngModel)]="columns.dateOfRecording">
+      <small>Transaction Type</small><input type="checkbox" name="transactionType" [(ngModel)]="columns.transactionType">
+      <small>Status</small><input type="checkbox" name="status" [(ngModel)]="columns.status">
+      <small>Business Partner</small><input type="checkbox" name="businessPartner" [(ngModel)]="columns.businessPartner">
+      <small>Business Partner Location</small><input type="checkbox" name="businessPartnerLocation" [(ngModel)]="columns.businessPartnerLocation">
+      <small>Year</small><input type="checkbox" name="year" [(ngModel)]="columns.year">
+    </form>
+  </div>
+</div>
+<table class="table table-striped">
+  <thead class="thead-default">
+    <tr>
+      <th *ngIf="columns.dateOfCreation" (click)="changeSort('dateOfCreation')">
+        Date of Creation
+        <i class="fa fa-sort" aria-hidden="true" *ngIf="sort != 'dateOfCreation'"></i>
+        <i class="fa fa-sort-desc" aria-hidden="true" *ngIf="sort == 'dateOfCreation' && sortDirection == 'desc'"></i>
+        <i class="fa fa-sort-asc" aria-hidden="true" *ngIf="sort == 'dateOfCreation' && sortDirection == 'asc'"></i>
+      </th>
+      <th *ngIf="columns.dateOfRecording" (click)="changeSort('dateOfRecording')">
+        Date of Recording
+        <i class="fa fa-sort" aria-hidden="true" *ngIf="sort != 'dateOfRecording'"></i>
+        <i class="fa fa-sort-desc" aria-hidden="true" *ngIf="sort == 'dateOfRecording' && sortDirection == 'desc'"></i>
+        <i class="fa fa-sort-asc" aria-hidden="true" *ngIf="sort == 'dateOfRecording' && sortDirection == 'asc'"></i>
+      </th>
+      <th *ngIf="columns.status" (click)="changeSort('status')">
+        Status
+        <i class="fa fa-sort" aria-hidden="true" *ngIf="sort != 'status'"></i>
+        <i class="fa fa-sort-desc" aria-hidden="true" *ngIf="sort == 'status' && sortDirection == 'desc'"></i>
+        <i class="fa fa-sort-asc" aria-hidden="true" *ngIf="sort == 'status' && sortDirection == 'asc'"></i>
+      </th>
+      <th *ngIf="columns.transactionType" (click)="changeSort('transactionType')">
+        Transaction Type
+        <i class="fa fa-sort" aria-hidden="true" *ngIf="sort != 'transactionType'"></i>
+        <i class="fa fa-sort-desc" aria-hidden="true" *ngIf="sort == 'transactionType' && sortDirection == 'desc'"></i>
+        <i class="fa fa-sort-asc" aria-hidden="true" *ngIf="sort == 'transactionType' && sortDirection == 'asc'"></i>
+      </th>
+      <th *ngIf="columns.businessPartner">Business Partner</th>
+      <th *ngIf="columns.businessPartnerLocation">Business Partner Location</th>
+      <th *ngIf="columns.year">Year</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let doc of documents" [routerLink]="[doc._id]">
+      <td *ngIf="columns.dateOfCreation">{{doc.dateOfCreation | date: 'MMM, d y'}}</td>
+      <td *ngIf="columns.dateOfRecording">{{doc.dateOfRecording | date: 'MMM, d y'}}</td>
+      <td *ngIf="columns.status">{{doc.status}}</td>
+      <td *ngIf="columns.transactionType">{{doc.transactionType}}</td>
+      <td *ngIf="columns.businessPartner">{{doc.businessPartner?.name}}</td>
+      <td *ngIf="columns.businessPartnerLocation">{{doc.businessPartner?.city}}, {{doc.businessPartner?.address}}</td>
+      <td *ngIf="columns.year">{{doc.year}}</td>
+    </tr>
+  </tbody>
+</table>

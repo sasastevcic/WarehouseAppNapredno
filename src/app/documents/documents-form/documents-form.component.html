@@ -1,0 +1,18 @@
+<div class="row">
+  <div class="col-sm-12">
+    <wo-document-panel [document]="document" (record)="recordDocument($event)"></wo-document-panel>
+  </div>
+</div>
+<div class="row" *ngIf="!document?.dateOfRecording">
+  <div class="col-sm-6">
+    <wo-item-list [items]="items"></wo-item-list>
+  </div>
+  <div class="col-sm-6">
+    <wo-item-form [articles]="articles" (addItem)="newItem($event)"></wo-item-form>
+  </div>
+</div>
+<div class="row" *ngIf="document?.dateOfRecording">
+  <div class="col-sm-12">
+    <wo-item-list [items]="items"></wo-item-list>
+  </div>
+</div>

@@ -1,0 +1,17 @@
+<form (submit)="saveItem()">
+  <div class="form-group">
+    <label for="article">Article</label>
+    <select id="article" class="form-control" name="article" [(ngModel)]="newItem.article">
+      <option *ngFor="let a of articles" value="{{a.code}}">{{a.name}}</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="price">Price</label>
+    <input type="number" step="0.01" class="form-control" name="price" id="price" [(ngModel)]="newItem.price">
+  </div>
+  <div class="form-group">
+    <label for="quantity">Quantity</label>
+    <input type="number" class="form-control" id="quantity" name="quantity" [(ngModel)]="newItem.quantity">
+  </div>
+  <button type="submit" class="btn btn-primary">Save</button>
+</form>

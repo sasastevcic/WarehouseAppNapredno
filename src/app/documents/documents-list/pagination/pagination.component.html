@@ -1,0 +1,11 @@
+<nav>
+ <ul class="pagination justify-content-center">
+   <li class="page-item"><a class="page-link" (click)="changePage(currentPage - 1)"><i class="fa fa-angle-double-left" aria-hidden="true"></i>
+</a></li>
+   
+   <li class="page-item" *ngFor="let p of pages; let i = index" [ngClass]="{active: i+1 == currentPage}" (click)="changePage(i+1)"><a class="page-link" >{{i+1}}</a></li>
+   
+   <li class="page-item"><a class="page-link" (click)="changePage(currentPage + 1)"><i class="fa fa-angle-double-right" aria-hidden="true"></i>
+</a></li>
+ </ul>
+</nav>
